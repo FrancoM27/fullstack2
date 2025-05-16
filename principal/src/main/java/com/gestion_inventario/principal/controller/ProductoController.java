@@ -2,6 +2,7 @@ package com.gestion_inventario.principal.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,7 +36,7 @@ public class ProductoController {
         return ResponseEntity.notFound().build(); 
     }
 
-    @PostMapping("/eliminarProducto/{idProducto}")
+    @DeleteMapping("/eliminarProducto/{idProducto}")
     public ResponseEntity<String> eliminarProducto(@PathVariable int idProducto){
         return ResponseEntity.ok(productoService.eliminarProducto(idProducto));
     }
