@@ -48,5 +48,20 @@ public class ProductoService {
             return null; 
         }
     }
+    public String eliminarProducto(int idProducto){
+        try {
+            boolean estado = productorepository.existsByIdProducto(idProducto);
+            if (estado) {
+                productorepository.deleteById(idProducto);
+                return "Producto eliminado correctamente";
+            }
+            return "El producto no existe"; 
+        } catch (Exception e) {
+            return "Error al eliminar producto";
+        }
+    }
+    
+
+
 
 }

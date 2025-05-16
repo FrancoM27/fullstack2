@@ -35,6 +35,8 @@ public class ProductoController {
         return ResponseEntity.notFound().build(); 
     }
 
-
-
+    @PostMapping("/eliminarProducto/{idProducto}")
+    public ResponseEntity<String> eliminarProducto(@PathVariable int idProducto){
+        return ResponseEntity.ok(productoService.eliminarProducto(idProducto));
+    }
 }
