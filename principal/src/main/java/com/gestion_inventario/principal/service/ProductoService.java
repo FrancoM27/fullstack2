@@ -1,5 +1,8 @@
 package com.gestion_inventario.principal.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +19,9 @@ public class ProductoService {
     public String crearProducto(Producto prod){
 
         try {
+            System.out.println("Creando producto: " + prod);
             boolean estado = productorepository.existsByIdProducto(prod.getIdProducto());
+            System.out.println("Estado: " + estado);
             if (!estado) {
                 ProductoEntity productoNuevo = new ProductoEntity();
                 productoNuevo.setIdProducto(prod.getIdProducto()); 
@@ -61,7 +66,39 @@ public class ProductoService {
         }
     }
     
+    public String actualizarProducto(Producto prod){
+        try {
+            boolean estado = productorepository.existsByIdProducto(prod.getIdProducto());
+            if (estado) {
+                ProductoEntity productoActualizar = productorepository.findByIdProducto(prod.getIdProducto());
+                productoActualizar.setNombreProducto(prod.getNombreProducto());
+                productoActualizar.setStock(prod.getStock());
+                productoActualizar.setPrecio(prod.getPrecio());
+                productorepository.save(productoActualizar);
+                return "Producto actualizado correctamente";
+            }
+            return "El producto no existe"; 
+        } catch (Exception e) {
+            return "Error al actualizar producto";
+        }
+    }
 
-
-
+    public List<Producto> listarProducto(){
+        try {
+            List<ProductoEntity> productosEntity = productorepository.findAll();
+            List<Producto> productos = new ArrayList<>();
+            for (ProductoEntity producto : productosEntity) {
+                Producto prod = new Producto(
+                    producto.getIdProducto(),
+                    producto.getNombreProducto(),
+                    producto.getStock(),
+                    producto.getPrecio()
+                );
+                productos.add(prod);
+            }
+            return productos;
+        } catch (Exception e) {
+            return null; 
+        }
+    }
 }

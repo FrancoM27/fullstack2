@@ -11,6 +11,7 @@ import com.gestion_inventario.principal.model.entity.ProductoEntity;
 public interface ProductoRepository extends JpaRepository<ProductoEntity, Integer> {
 
     ProductoEntity findByIdProducto(int idProducto);
+    ProductoEntity findByNombreProducto(String nombreProducto);
     boolean existsByIdProducto(int idProducto); 
-    
+    boolean existsByNombreProducto(String nombreProducto); 
 }
