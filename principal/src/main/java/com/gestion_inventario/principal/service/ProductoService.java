@@ -65,7 +65,7 @@ public class ProductoService {
             return "Error al eliminar producto";
         }
     }
-    
+     
     public String actualizarProducto(Producto prod){
         try {
             boolean estado = productorepository.existsByIdProducto(prod.getIdProducto());
