@@ -77,7 +77,7 @@ public class ProductoTest {
     }
 
     @Test
-    public void testObtenerEnvioNoExistente() {
+    public void testObtenerProductoNoExistente() {
         when(productoRepository.findByIdProducto(2)).thenReturn(null);
         Producto result = productoService.obtenerProducto(2);
         assertNull(result);
@@ -94,7 +94,7 @@ public class ProductoTest {
     } 
 
     @Test
-    public void testCrearEnvioExistente() {
+    public void testCrearProductoExistente() {
         when(productoRepository.existsByIdProducto(producto.getIdProducto())).thenReturn(true);
 
         String result = productoService.crearProducto(producto);
